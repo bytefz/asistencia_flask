@@ -1,0 +1,86 @@
+{% from "macros.html" import favicon %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+  {{favicon()}}
+  <link rel="stylesheet" href={{url_for('static', filename='css/normalize.css')}}>
+  <link rel="stylesheet" href={{url_for('static', filename='css/registro/registro.css')}}>
+  {{ bootstrap.load_css() }}
+  {{ moment.include_moment() }}
+</head>
+<body class="body-own">
+  {{ bootstrap.load_js() }}
+  <div class="container m-auto">
+    <div class="card" style="border-radius: 15px; box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.2);">
+      <div class="card-body p-5">
+        <h3 class="text-title text-center mb-5">Create an account</h3>
+        <form method="post" action="/register">
+          {{ form.csrf_token }}
+          <div class="form-outline mb-4">
+            {{form.first_name(class_="form-control form-control-lg", placeholder="Luis")}}
+            {{form.first_name.label(class_="form-label")}}
+          </div>
+          <div class="form-outline mb-4">
+            {{form.last_name(class_="form-control form-control-lg", placeholder="López")}}
+            {{form.last_name.label(class_="form-label")}}
+          </div>
+          <div class="form-outline mb-4">
+            {{form.work_id(class_="form-control form-control-lg", placeholder="López")}}
+            {{form.work_id.label(class_="form-label")}}
+          </div>
+          <div class="form-outline mb-4">
+            {% with messages = get_flashed_messages()%}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-warning" role="alert">
+                    {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            {{form.email(class_="form-control form-control-lg", placeholder="example@mail.com")}}
+            {{form.email.label(class_="form-label")}}            
+          </div>
+          
+          <div class="form-outline mb-4">
+            {{form.password(class_="form-control form-control-lg")}}
+            <label class="form-label" for="password">Password</label>
+            {{form.password.label(class_="form-label")}}
+            {% for error in form.password.errors %}
+              <div class="alert alert-warning" role="alert">
+                <strong>{{ error|e }}</strong>
+              </div>            
+            {% endfor %}
+          </div>
+          
+          <div class="form-outline mb-4">
+            {{form.password_confirmer(class_="form-control form-control-lg")}}
+            {{form.password_confirmer.label(class_="form-label")}}
+            
+          </div>
+
+          <div class="form-check d-flex justify-content-center mb-5">
+            {{form.agree_to_terms(class_="form-check-input me-2", value="True")}}
+            <label class="form-check-label" for="agree_to_terms">
+              I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+            </label>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            {{form.register(class_="btn btn-config btn-block btn-lg gradient-custom-4",)}}
+          </div>
+
+          <p class="text-center text-muted mt-5 mb-0">Have already an account?<a href="{{url_for('login')}}"
+              class="fw-bold text-body"><u>Login here</u></a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+

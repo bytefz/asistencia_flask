@@ -1,0 +1,71 @@
+{% from "macros.html" import favicon %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Franzua Plasencia - GitHub🤖: @plasenca">
+    {{favicon()}}
+    <title>Login</title>
+    {{ bootstrap.load_css() }}
+    {{ moment.include_moment() }}
+
+    <!-- Custom styles for this template -->
+    <link href={{ url_for("static", filename="css/login/signin.css") }} rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    {{ bootstrap.load_js() }}
+<main class="form-signin w-100 m-auto">
+  <form method="post" action="/login">
+    {{ form.csrf_token }}
+    <img class="mb-4 imagen" src="static/logo.png" alt="" width="200" height="200">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    {% block register %}{% endblock %}
+
+    {%with messages = get_flashed_messages()%}
+      {% if messages %}
+          {% for message in messages %}
+            {% if request.method == "GET" %}
+            <div class="alert alert-primary" role="alert">
+              {{message}}
+            </div>
+            {% else %}
+              <div class="alert alert-danger" role="alert">
+                {{message}}
+              </div>
+            {% endif %}
+          {% endfor %}
+      {% endif %}
+    {%endwith%}
+    
+    <div class="form-floating">
+      {{form.email(class_="form-control", id="floatingInput", placeholder="name@example.com")}}
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      {{form.password(class_="form-control", id="floatingPassword", placeholder="Password")}}
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="checkbox mb-3 col checkbox-margin-top">
+          <label>
+            {{form.remember(checked=False)}}
+            Remember me
+          </label>
+        </div>
+        <div class="mb-3 center col">
+          <a class="btn btn-link btn-registro btn-outline-secondary" href="{{url_for('registro')}}">Sign in</a>
+        </div>
+      </div>
+    </div>
+    {{form.login(class_="w-100 btn btn-lg btn-color-own", value="Sign in")}}
+    <p class="mt-5 mb-3 text-muted">&copy;Grupo Coinp {{moment().format("YYYY")}}</p>
+  </form>
+</main>
+  </body>
+</html>

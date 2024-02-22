@@ -1,0 +1,35 @@
+
+.body-own{
+    background: rgb(8,45,77);
+    background: linear-gradient(90deg, 
+    rgba(8,45,77,1) 0%, 
+    rgba(18,96,163,1) 50%, 
+    rgba(26,140,237,1) 100%);
+    width: auto;
+    height: auto;
+}
+
+.btn-config{
+    background-color: rgba(8,45,77,1)!important;
+    color: aliceblue !important;
+}
+
+:hover.btn-config{
+    background-color: rgba(26,140,237,1)!important;
+    color: black !important;
+}
+
+::placeholder{
+    font-size: .8em;
+}
+
+@media  (min-width: 1400px), 
+        (max-width: 1399px),
+        (min-width: 768px) ,
+        (max-width: 540px) {
+    .container {
+        padding-top: 3em;
+        padding-bottom: 3em;
+        max-width: 540px!important;
+    }
+}

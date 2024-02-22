@@ -1,0 +1,8 @@
+{% macro favicon() -%}
+<link rel="shortcut icon"
+      type="image/ico"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      id="favicon"
+      data-original-href="{{ url_for('static', filename='favicon.ico') }}"
+/>
+{%- endmacro %}

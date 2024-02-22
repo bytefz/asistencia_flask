@@ -1,0 +1,32 @@
+{% from 'macros.html' import favicon %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Franzua Plasencia - GitHub🤖: @plasenca">
+  {{favicon()}}
+  <title>Main - Grupo Coinp</title>
+  {{bootstrap.load_css()}}
+  <link rel="stylesheet" href={{url_for("static", filename="css/main/main.css")}}>
+
+
+  <!-- Custom styles for this template -->
+  <link href={{ url_for("static", filename="css/main/dashboard.css" ) }} rel="stylesheet">
+</head>
+
+<body>
+  {% block header %}{% endblock header %}
+
+  {% block nav %}{% endblock nav %}
+
+  {% block main %}{% endblock main %}
+
+  {{bootstrap.load_js()}}
+  <script src={{ url_for("static", filename="js/main/dashboard.js" ) }}></script>
+  <script src={{ url_for("static", filename="js/main/main.js" ) }}></script>
+</body>
+
+</html>
